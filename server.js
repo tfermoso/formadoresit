@@ -28,6 +28,5 @@ function comprobarUsuario(user,pass) {
         return true;
     }else{
         return false;
-    }
-    
+    }  
 }
