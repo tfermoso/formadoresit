@@ -1,9 +1,11 @@
 const express = require('express')
 const comprobarUsuario=require('./validacion');
+const conexion=require('./BBDD');
 require('dotenv').config()
 var bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken');
 const verifyToken = require('./validate-token');
+const Conexion = require('./BBDD');
 const app = express()
 app.use(bodyParser.json());
 
@@ -31,7 +33,11 @@ app.post("/login",(req,res)=>{
 })
 
 app.get("/datos",verifyToken,(req,res)=>{
-    res.json({datos: "datos"})
+    let con=new Conexion();
+    con.getDatos((result)=>{
+        res.json({datos: result})
+    })
+    
 })
 
 app.listen(process.env.PORT,()=>{
