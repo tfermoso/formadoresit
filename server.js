@@ -3,7 +3,7 @@ const comprobarUsuario=require('./validacion');
 require('dotenv').config()
 var bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken');
-
+const verifyToken = require('./validate-token');
 const app = express()
 app.use(bodyParser.json());
 
@@ -28,6 +28,10 @@ app.post("/login",(req,res)=>{
     })
   
     
+})
+
+app.get("/datos",verifyToken,(req,res)=>{
+    res.json({datos: "datos"})
 })
 
 app.listen(process.env.PORT,()=>{
